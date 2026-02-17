@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { Search, Send, ArrowLeft, MoreVertical, Circle, Paperclip, Smile, Sparkles } from 'lucide-react';
 import { Conversation, ChatMessage } from '../types';
 import { supabase } from '../lib/supabase';
-import { getAIAssistantResponse } from '../services/geminiService';
+import { getAIAssistantResponse } from '../lib/geminiService';
 
 interface MessengerViewProps {
   onBack: () => void;

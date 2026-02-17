@@ -1,7 +1,7 @@
 
 import React, { useState, useRef } from 'react';
 import { Sparkles, Wand2, Upload, Newspaper, ShoppingBag, Share2, Wallet, X, Radio, Plus } from 'lucide-react';
-import { generateAuraImage } from '../services/geminiService';
+import { generateAuraImage } from '../lib/geminiService';
 import { Post, Theme } from '../types';
 
 interface StudioViewProps {
