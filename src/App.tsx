@@ -159,9 +159,14 @@ const App: React.FC = () => {
   }, [posts, searchQuery]);
 
   const handleNewPost = (newPost: Post, target: any) => {
+    // Ensure profile is valid
+    const userName = profile?.name || 'Citizen';
+    const userHandle = profile?.handle || 'user';
+    const userAvatar = profile?.avatar_url || `https://api.dicebear.com/7.x/avataaars/svg?seed=${Date.now()}`;
+
     const postWithUser = {
       ...newPost,
-      user: { name: profile.name || 'Citizen', handle: profile.handle, avatar: profile.avatar_url, verified: true },
+      user: { name: userName, handle: userHandle, avatar: userAvatar, verified: true },
       likes: 0, comments: 0, commentList: [], timestamp: Date.now(),
       isProduct: target === 'SHOP',
       isNews: target === 'NEWS'
@@ -169,7 +174,7 @@ const App: React.FC = () => {
     if (target === 'REEL') setReels(prev => [postWithUser, ...prev]);
     else if (target === 'STORY') setStories(prev => [{ ...postWithUser, isStory: true }, ...prev]);
     else setPosts(prev => [postWithUser, ...prev]);
-    
+
     if (target === 'REEL') setCurrentView(ViewType.PULSE);
     else if (target === 'SHOP') setCurrentView(ViewType.SHOP);
     else if (target === 'NEWS') setCurrentView(ViewType.ACTUALITE);
@@ -183,13 +188,16 @@ const App: React.FC = () => {
   }, []);
 
   const fetchOrCreateProfile = async (user: any) => {
-    const userName = user.user_metadata?.name || 'Citizen';
+    const userName = user?.user_metadata?.name || user?.name || 'Citizen';
+    const userId = user?.id || 'demo-' + Date.now();
+    const userEmail = user?.email || 'demo@univers.app';
+
     setProfile({
-      id: user.id,
+      id: userId,
       name: userName,
-      email: user.email,
-      handle: (userName).toLowerCase().replace(/\s/g, '_') + '_' + user.id.slice(-4),
-      avatar_url: `https://api.dicebear.com/7.x/avataaars/svg?seed=${user.id}`,
+      email: userEmail,
+      handle: (userName || 'user').toLowerCase().replace(/\s/g, '_') + '_' + String(userId).slice(-4),
+      avatar_url: `https://api.dicebear.com/7.x/avataaars/svg?seed=${userId}`,
       tokens: 1000, status: 'single', city: '', studies: ''
     });
   };

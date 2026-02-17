@@ -65,7 +65,7 @@ const RegistrationView: React.FC<RegistrationViewProps> = ({ onRegister }) => {
           <div className="w-20 h-20 bg-emerald-600 rounded-3xl mx-auto flex items-center justify-center shadow-2xl rotate-3 hover:rotate-0 transition-all duration-500">
             <ShieldCheck className="text-black" size={40} />
           </div>
-          <h1 className="text-3xl font-display font-bold text-white tracking-tighter uppercase">Univers Nexus</h1>
+          <h1 className="text-3xl font-display font-bold text-white tracking-tighter uppercase">Univers</h1>
           <p className="text-[9px] font-black text-emerald-400/60 uppercase tracking-[0.4em]">
             {isLoginMode ? 'Bio-Digital Sync' : 'Initialize Neural Node'}
           </p>
